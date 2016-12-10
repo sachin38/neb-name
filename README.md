@@ -19,4 +19,4 @@ USAGE
 
 Credits
 ===================
-	###Brother Amit Chaudhary for neb.py
+	Brother Amit Chaudhary
