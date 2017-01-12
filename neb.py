@@ -2,25 +2,33 @@
 import requests
 from bs4 import BeautifulSoup
 
-print "Enter your Symbol number: ",
-number = raw_input()
+print "Enter first symbol number: ",
+first_symbol = int(raw_input())
 
-data = {
-  'keyword': number,
-  'slug': 'SearchResult'
-}
+print "Enter the last symbol number: ",
+last_symbol = int(raw_input())
 
-req = requests.post('http://www.neb.gov.np/result/search', data=data)
-response = req.text
-soup = BeautifulSoup(response, 'html.parser')
+symbol_list = range(first_symbol, last_symbol+1)
 
-# Gives output like: Congratulation!! FirstName LastName ,
-h1_text = soup.find('h1', {'class': ['text-success text-center', 'text-danger text-center'] }).text
 
-# Extract only name from that text
-if "Congratulation" in h1_text:
-    name = h1_text.lstrip('Congratulation!! ').rstrip(', ')
-else:
-    name = h1_text.lstrip('Sorry!! ').rstrip(', ')
-
-print name
+for symbol in symbol_list:
+    url = "http://www.neb.gov.np/results/search?SYMB="+str(symbol)+"&btn=Search"
+    req = requests.get(url)
+    response = req.text
+    soup = BeautifulSoup(response, "lxml")
+    td = soup.find('td', {'class' : 'borderResult'})
+    div = td.find('div')
+    p = div.find('p')
+    to_be_split = p.text
+    data = to_be_split.split(',')
+    name = data[0].replace(".","")
+    dob =  data[1].replace(".","")
+    name = name[19:]
+    dob = dob[13:]
+    print "SYMBOL: ",symbol
+    print "NAME: ",name
+    print "DATE OF BIRTH: ",dob
+    result = soup.findAll("div")
+    status = result[43].text
+    print "MARKS AND RESULT: ",status
+    print "*********\n"
