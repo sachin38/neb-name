@@ -1,7 +1,6 @@
-These scripts fetches name of students from neb.gov.np when symbol number is entered
+This script fetches name of students and their results from neb.gov.np when symbol number is entered
 
-###neb.py *IS TO FETCH NAME OF STUDENTS USING SYMBOL NUMBER*
-###neb2.py *IS TO FETCH NAME OF ALL STUDENTS. IT REQUIRES STARTING AND ENDING SYMBOL NUMBER*
+###neb.py *IS TO FETCH NAME AND RESULT OF ALL STUDENTS. IT REQUIRES STARTING AND ENDING SYMBOL NUMBER*
 
 Libraries Required
 ==================
@@ -13,10 +12,4 @@ USAGE
 	----------
 	python neb.py
 
-	For neb2.py
-	----------
-	python neb2.py
 
-Credits
-===================
-	Brother Amit Chaudhary
