@@ -25,6 +25,7 @@ for symbol in symbol_list:
     dob =  data[1].replace(".","")
     name = name[19:]
     dob = dob[13:]
+    print "*********\n"
     print "SYMBOL: ",symbol
     print "NAME: ",name
     print "DATE OF BIRTH: ",dob
@@ -32,3 +33,17 @@ for symbol in symbol_list:
     status = result[43].text
     print "MARKS AND RESULT: ",status
     print "*********\n"
+    text_file = open("students.text", "a")
+    text_file.write("NAME: ")
+    text_file.write(str(name.encode("utf-8")))
+    text_file.write("\n")
+    text_file.write("Symbol no: ")
+    text_file.write(str(symbol))
+    text_file.write("\n")
+    text_file.write("DATE OF BIRTH: ")
+    text_file.write(str(dob))
+    text_file.write("\n")
+    text_file.write("RESULT STATUS: ")
+    text_file.write(str(status))
+    text_file.write("\n**************************\n\n")
+    text_file.close()
