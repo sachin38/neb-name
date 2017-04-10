@@ -13,7 +13,13 @@ symbol_list = range(first_symbol, last_symbol+1)
 
 for symbol in symbol_list:
     url = "http://www.neb.gov.np/results/search?SYMB="+str(symbol)+"&btn=Search"
-    req = requests.get(url)
+    try:
+        req = requests.get(url)
+        
+    except requests.exceptions.RequestException as e:
+        print e
+        sys.exit(1)
+    
     response = req.text
     soup = BeautifulSoup(response, "lxml")
     td = soup.find('td', {'class' : 'borderResult'})
@@ -25,6 +31,7 @@ for symbol in symbol_list:
     dob =  data[1].replace(".","")
     name = name[19:]
     dob = dob[13:]
+    
     print "*********\n"
     print "SYMBOL: ",symbol
     print "NAME: ",name
@@ -33,6 +40,7 @@ for symbol in symbol_list:
     status = result[43].text
     print "MARKS AND RESULT: ",status
     print "*********\n"
+    
     text_file = open("students.text", "a")
     text_file.write("NAME: ")
     text_file.write(str(name.encode("utf-8")))
